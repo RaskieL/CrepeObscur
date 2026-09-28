@@ -7,12 +7,14 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float _speed;
+    public float Speed => _speed;
 
     // PRIVATE
 
     private Vector2 _moveInput;
     private Rigidbody _rb;
     private bool _isMoving;
+    public bool IsMoving => _isMoving;
 
     // UNITY
 
