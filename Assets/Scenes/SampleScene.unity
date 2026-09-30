@@ -266,7 +266,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eddb0793d220eb4d8d83e2506e4ea7f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d144820c5a38de409a7e365e50d4e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   playerTransform: {fileID: 2108799133}
@@ -524,7 +524,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 93bf28b89fa95614fa154c7afafb7bb0, type: 2}
+  - {fileID: 2100000, guid: f60a11d95739aac49bd4be213c0f72d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -597,7 +597,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 808657987}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd1c53768e6f48d4eb8bf5590ed9611e, type: 3}
+  m_Script: {fileID: 11500000, guid: e28a7433bd01961418c670e0b1beb93b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputs
 --- !u!4 &808657989
@@ -648,7 +648,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 4eab07c8268dbd740af6e0440e6fff00, type: 2}
 --- !u!4 &832575519
 Transform:
   m_ObjectHideFlags: 0
@@ -759,7 +759,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 93bf28b89fa95614fa154c7afafb7bb0, type: 2}
+  - {fileID: 2100000, guid: f60a11d95739aac49bd4be213c0f72d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -901,7 +901,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 93bf28b89fa95614fa154c7afafb7bb0, type: 2}
+  - {fileID: 2100000, guid: f60a11d95739aac49bd4be213c0f72d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1014,7 +1014,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3eba379d0e8791948b8270716f845a38, type: 2}
+  - {fileID: 2100000, guid: ec4297777c07c3e428f884187f7ffecc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1131,7 +1131,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 93bf28b89fa95614fa154c7afafb7bb0, type: 2}
+  - {fileID: 2100000, guid: f60a11d95739aac49bd4be213c0f72d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1187,10 +1187,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2108799129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1c1eaa2e6332d24ba18f70b9ac8d662, type: 3}
+  m_Script: {fileID: 11500000, guid: 06b3e4b5b0bb71545859ff8e52ce2ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _speed: 300
+  playerController: {fileID: 2108799136}
+  characters:
+  - {fileID: 1421695229}
+  - {fileID: 725877854}
+  - {fileID: 1538339266}
+  stopDistance: 1.5
+  acceleration: 30
+  deceleration: 20
+  followStrength: 10
 --- !u!54 &2108799135
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1227,18 +1235,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2108799129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d93e7ed51928ae64e81f74a4ce7e9c75, type: 3}
+  m_Script: {fileID: 11500000, guid: 59f70e2c40bde694a9d86934d1165ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterFollow
-  playerController: {fileID: 2108799134}
-  characters:
-  - {fileID: 1421695229}
-  - {fileID: 725877854}
-  - {fileID: 1538339266}
-  stopDistance: 1.5
-  acceleration: 20
-  deceleration: 30
-  followStrength: 6
+  _speed: 300
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
