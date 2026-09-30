@@ -271,6 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   playerTransform: {fileID: 2108799133}
   _zOffset: 20
+  _yOffset: -8
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
