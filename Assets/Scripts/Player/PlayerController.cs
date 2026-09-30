@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         PlayerInputs.instance.onStopMove -= StopMove;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_isMoving) Move();
     }
