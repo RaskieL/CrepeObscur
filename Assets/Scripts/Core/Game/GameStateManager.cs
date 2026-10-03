@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class GameStateManager : MonoBehaviour
 {
-    private Stack<BaseGameState> stateStack = new Stack<BaseGameState>();
+    private readonly Stack<BaseGameState> stateStack = new Stack<BaseGameState>();
     [field: SerializeField] public UIManager UI { get; private set; }
 
     public BaseGameState CurrentGameState
