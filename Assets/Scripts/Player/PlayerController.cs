@@ -44,12 +44,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_isMoving) Move();
-    }
-
-    private void Update()
-    {
-        _isGrounded = Physics.Raycast(transform.position, -Vector3.up,playerHeight * 0.5f + 0.2f, groundLayer);
+        _isGrounded = Physics.Raycast(transform.position, -Vector3.up, playerHeight * 0.5f + 0.2f, groundLayer);
         SpeedControl();
 
         if (_isGrounded)
@@ -60,6 +55,8 @@ public class PlayerController : MonoBehaviour
         {
             _rb.linearDamping = 0;
         }
+
+        if (_isMoving) Move();
     }
 
     // INTERNAL
@@ -79,12 +76,12 @@ public class PlayerController : MonoBehaviour
 
         if (_isGrounded) // on the ground
         {
-            _rb.AddForce(movement * _speed * Time.deltaTime, ForceMode.Impulse);
+            _rb.AddForce(movement * _speed, ForceMode.Force);
         }
         
         if (!_isGrounded) // in the air
         {
-            _rb.AddForce(movement * _speed * Time.deltaTime * airMultiplier, ForceMode.Impulse);
+            _rb.AddForce(movement * _speed * airMultiplier, ForceMode.Force);
         }
 
         Quaternion targetRotation = Quaternion.LookRotation(movement);
@@ -97,18 +94,18 @@ public class PlayerController : MonoBehaviour
         _isMoving = false;
     }
 
-    /// <summary>
-    /// Control the max velocity the player can reach, 
-    /// if the current velocity is higher than the set speed 
-    /// </summary>
+    /*
+    Control the max velocity the player can reach,
+    if the current velocity is higher than the set speed it will cap it down
+    */
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(_rb.linearVelocity.x, 0, _rb.linearVelocity.z);
 
-        if(flatVel.magnitude > _speed)
+        if (flatVel.magnitude > _speed)
         {
-            Vector3 maxVel = flatVel * _speed;
-            _rb.linearVelocity = new Vector3(maxVel.x,_rb.linearVelocity.y, maxVel.z);
+            Vector3 maxVel = flatVel.normalized * _speed;
+            _rb.linearVelocity = new Vector3(maxVel.x, _rb.linearVelocity.y, maxVel.z);
         }
     }
 }
