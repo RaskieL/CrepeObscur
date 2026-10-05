@@ -1,23 +1,29 @@
+using Unity.Collections;
 using UnityEngine;
 
-public class SceneManager : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private string _currentScene;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    /*
-     
-    Get a request to transport the player to scene[x]
-     
-     
-     */
+    //void public SceneChange(string newScene, string spawnName)
+
+
+    public void TeleportPlayer(string newScene, string spawnPointName)
+    {
+        if (_currentScene != null) 
+        {
+            Debug.LogError("No current scene detected");
+        }
+
+        if (newScene == _currentScene)
+        { 
+            // teleport player to the point
+        }
+        else
+        {
+            // change player scene and teleport it to the set point
+        }
+    }
 }
+ 

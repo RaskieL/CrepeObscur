@@ -9,7 +9,7 @@ public class DontDestroyOnLoadScene : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.LogWarning("Il y a plus d'une instance de DontDestroyOnLoadScene dans la scène");
+            Debug.LogWarning("There's more than one instance of DontDestroyOnLoadScene in the scene");
             return;
         }
 
