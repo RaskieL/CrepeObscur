@@ -81,7 +81,8 @@ public class PlayerController : MonoBehaviour
         
         if (!_isGrounded) // in the air
         {
-            _rb.AddForce(movement * _speed * airMultiplier, ForceMode.Force);
+            Vector3 airMovement = new Vector3(movement.x * 0.5f, movement.y - 2, movement.z * 0.5f); // random values
+            _rb.AddForce(airMovement * _speed * airMultiplier, ForceMode.Force);
         }
 
         Quaternion targetRotation = Quaternion.LookRotation(movement);
