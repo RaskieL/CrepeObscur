@@ -418,6 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   playerTransform: {fileID: 2108799133}
   _zOffset: 20
+  _yOffset: -8
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,6 +1648,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterFollow
   _speed: 300
+  groundDrag: 15
+  playerHeight: 2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  airMultiplier: 0.04
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
