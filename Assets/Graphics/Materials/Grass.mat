@@ -43,6 +43,7 @@ Material:
     m_Colors:
     - _DarkColor: {r: 0.03781415, g: 0.42641503, b: 0.30369893, a: 1}
     - _LightColor: {r: 0.6622972, g: 0.8867924, b: 0.35973647, a: 1}
+    - _LighterColor: {r: 0.9773585, g: 0.9615542, b: 0.12355278, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &5918410121713140839
