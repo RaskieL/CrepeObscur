@@ -8,6 +8,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _speed;
     public float Speed => _speed;
+    public float groundDrag;
+    public float playerHeight;
+    public LayerMask groundLayer;
+    public float airMultiplier = 0;
 
     // PRIVATE
 
@@ -15,6 +19,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rb;
     private bool _isMoving;
     public bool IsMoving => _isMoving;
+
+    private bool _isGrounded;
+    
 
     // UNITY
 
@@ -37,6 +44,18 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        _isGrounded = Physics.Raycast(transform.position, -Vector3.up, playerHeight * 0.5f + 0.2f, groundLayer);
+        SpeedControl();
+
+        if (_isGrounded)
+        {
+            _rb.linearDamping = groundDrag;
+        }
+        else
+        {
+            _rb.linearDamping = 0;
+        }
+
         if (_isMoving) Move();
     }
 
@@ -54,7 +73,17 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         Vector3 movement = new Vector3(_moveInput.x, 0, _moveInput.y);
-        _rb.AddForce(movement * _speed * Time.deltaTime, ForceMode.Impulse);
+
+        if (_isGrounded) // on the ground
+        {
+            _rb.AddForce(movement * _speed, ForceMode.Force);
+        }
+        
+        if (!_isGrounded) // in the air
+        {
+            Vector3 airMovement = new Vector3(movement.x * 0.5f, movement.y - 2, movement.z * 0.5f); // random values
+            _rb.AddForce(airMovement * _speed * airMultiplier, ForceMode.Force);
+        }
 
         Quaternion targetRotation = Quaternion.LookRotation(movement);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime); // Player looks smoothly into the direction it is going
@@ -64,5 +93,20 @@ public class PlayerController : MonoBehaviour
     {
         _rb.angularVelocity = Vector3.zero; // Prevents the player from spining
         _isMoving = false;
+    }
+
+    /*
+    Control the max velocity the player can reach,
+    if the current velocity is higher than the set speed it will cap it down
+    */
+    private void SpeedControl()
+    {
+        Vector3 flatVel = new Vector3(_rb.linearVelocity.x, 0, _rb.linearVelocity.z);
+
+        if (flatVel.magnitude > _speed)
+        {
+            Vector3 maxVel = flatVel.normalized * _speed;
+            _rb.linearVelocity = new Vector3(maxVel.x, _rb.linearVelocity.y, maxVel.z);
+        }
     }
 }
