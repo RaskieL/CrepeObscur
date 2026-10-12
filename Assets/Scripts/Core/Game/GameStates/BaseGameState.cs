@@ -2,13 +2,13 @@ using UnityEngine;
 
 public abstract class BaseGameState
 {
-    protected readonly GameStateManager _manager;
-    protected readonly PlayerController _player;
+    protected readonly GameStateManager _stateManager;
+    protected readonly GameManager _gameManager;
 
-    protected BaseGameState(GameStateManager manager)
+    protected BaseGameState(GameStateManager stateManager, GameManager gameManager)
     {
-        _manager = manager;
-        _player = Object.FindAnyObjectByType<PlayerController>();
+        _gameManager = gameManager;
+        _stateManager = stateManager;
     }
     public abstract void Enter(); // quand l'état est ajouté à la pile
     public abstract void Exit(); // quand l'état est retiré de la pile

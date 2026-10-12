@@ -4,8 +4,6 @@ using System.Collections.Generic;
 public class GameStateManager : MonoBehaviour
 {
     private readonly Stack<BaseGameState> stateStack = new Stack<BaseGameState>();
-    [field: SerializeField] public UIManager UI { get; private set; }
-
     public BaseGameState CurrentGameState
     {
         get
@@ -14,10 +12,15 @@ public class GameStateManager : MonoBehaviour
         } 
     }
 
+    public void Initialize(GameManager gameManager)
+    {
+        ChangeState(new MenuState(this, gameManager));
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-        ChangeState(new MenuState(this));
+        //
     }
 
     // Update is called once per frame

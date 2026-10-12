@@ -3,12 +3,14 @@ using UnityEngine.InputSystem;
 public class ExplorationState : BaseGameState
 {
     private string _stateDescription = "Exploration (press esc to pause)";
-    public ExplorationState(GameStateManager manager) : base(manager) {}
+    protected PlayerController _player;
+    public ExplorationState(GameStateManager stateManager, GameManager gameManager) : base(stateManager, gameManager) {}
 
     public override void Enter()
     {
         _player.enabled = true;
-        _manager.UI.DisplayStateInfo(_stateDescription);
+        _gameManager.UIManager.DisplayStateInfo(_stateDescription);
+        _player = Object.FindAnyObjectByType<PlayerController>();
         Debug.Log("Entering ExploreState");
     }
 
@@ -22,7 +24,7 @@ public class ExplorationState : BaseGameState
     {
         if(Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-          _manager.PushState(new PauseState(_manager));
+          _stateManager.PushState(new PauseState(_stateManager, _gameManager));
         }
     }
 
@@ -35,7 +37,7 @@ public class ExplorationState : BaseGameState
     public override void Resume()
     {
         _player.enabled = true;
-        _manager.UI.DisplayStateInfo(_stateDescription);
+        _gameManager.UIManager.DisplayStateInfo(_stateDescription);
         Debug.Log("Resuming ExploreState");
     }
 }
