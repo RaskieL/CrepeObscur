@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class MenuState : BaseGameState
 {
-    private string _stateDescription = "Menu (press enter to play)";
+    private string _stateDescription = "Menu (press enter to play) OUI ÇA MARCHE PLUS BAH PROUT HEIN!->need new scene for main menu";
     public MenuState(GameStateManager stateManager, GameManager gameManager) : base(stateManager, gameManager) {}
     public override void Enter()
     {
