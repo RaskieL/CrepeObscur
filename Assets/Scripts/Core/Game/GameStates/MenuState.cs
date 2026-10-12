@@ -20,6 +20,7 @@ public class MenuState : BaseGameState
     {
         if (Keyboard.current != null && Keyboard.current.enterKey.wasPressedThisFrame)
         {
+            Debug.Log("Enter ke ywas pressed !");
              _manager.ChangeState(new ExplorationState(_manager));
         }   
     }
