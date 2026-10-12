@@ -8,7 +8,6 @@ public class CombatManager : MonoBehaviour
         // TODO
     }
     
-    // Principal Action Manager method... TODO découpler la méthode et diviser les responsabilités ?
     public void ExecuteAction(Combatant attacker, List<IDamageable> targets, ActionData action)
     {
         bool result = action.Execute(attacker, targets); // retourne true ou false si l'action a réussi ou échoué TODO: Handle return value
