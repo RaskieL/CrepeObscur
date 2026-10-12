@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class CombatantData : ScriptableObject
@@ -14,15 +15,12 @@ public abstract class CombatantData : ScriptableObject
     [TODO] ne pas oublier de mettre à jour les personnages/ennemis déjà créés;
     */
     [Header("Base character stats")] 
-    public int baseStrength = 10;
-    public int baseDexterity = 10;
-    public int baseConstitution = 10;
-    public int baseWisdom = 10;
-    public int baseIntelligence = 10;
-    public int baseCharisma = 10;
     
-    
-    // [Header("Base statistics")] 
-    // public int baseHealth = 100; -> constitution * 10 ?
-    // public int baseMana = 100; -> intelligence * 10 ?
+
+    [Header("Actions")] 
+    public List<ActionData> availableActions;
+
+
+    [Header("Base statistics")] 
+    public CombatStats baseStats;
 }

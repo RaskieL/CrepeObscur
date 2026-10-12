@@ -3,11 +3,11 @@ using UnityEngine.InputSystem;
 public class MenuState : BaseGameState
 {
     private string _stateDescription = "Menu (press enter to play)";
-    public MenuState(GameStateManager manager) : base(manager) {}
+    public MenuState(GameStateManager stateManager, GameManager gameManager) : base(stateManager, gameManager) {}
     public override void Enter()
     {
-        _player.enabled = false;
-        _manager.UI.DisplayStateInfo(_stateDescription);
+        //_player.enabled = false;
+        _gameManager.UIManager.DisplayStateInfo(_stateDescription);
         Debug.Log("Entering MenuState");
     }
 
@@ -20,7 +20,7 @@ public class MenuState : BaseGameState
     {
         if (Keyboard.current != null && Keyboard.current.enterKey.wasPressedThisFrame)
         {
-             _manager.ChangeState(new ExplorationState(_manager));
+             _stateManager.ChangeState(new ExplorationState(_stateManager, _gameManager));
         }   
     }
 
@@ -31,7 +31,7 @@ public class MenuState : BaseGameState
 
     public override void Resume()
     {
-        _manager.UI.DisplayStateInfo(_stateDescription);
+        _gameManager.UIManager.DisplayStateInfo(_stateDescription);
         Debug.Log("Resuming MenuState");
     }
 }
