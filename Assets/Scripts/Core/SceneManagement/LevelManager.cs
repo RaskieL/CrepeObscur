@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -43,18 +44,19 @@ public class LevelManager : MonoBehaviour
 
         if (currentTravelPoint.SceneName == currentTravelPoint.ExitSceneName)
         {
-            MovePlayer(currentTravelPoint.SpawnPointName);
+            MovePlayer(currentTravelPoint.ExitName);
         }
         else
         {
             Debug.Log("Change to scene : " + currentTravelPoint.ExitSceneName + " previous scene was : " + currentTravelPoint.SceneName);
-            ChangeScene(currentTravelPoint.ExitSceneName, currentTravelPoint.SpawnPointName);
+            ChangeScene(currentTravelPoint.ExitSceneName, currentTravelPoint.ExitName);
         }
     }
 
     // Register a new spawnList
     public void RegisterSpawnList(List<TravelPoint> list) 
-    { 
+    {
+        Debug.Log("Registered new spawnList : ");
         CurrentSpawnList = list;
     }
 
@@ -63,8 +65,8 @@ public class LevelManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            if(list == Instance.CurrentSpawnList) { CurrentSpawnList = null; }
-            Debug.Log("New spawn list registered !");
+            Debug.Log("Unregistered the spawnList : ");
+            if (list == Instance.CurrentSpawnList) { CurrentSpawnList = null; }
         }
     }
 
@@ -72,6 +74,13 @@ public class LevelManager : MonoBehaviour
     private void MovePlayer(string spawnPointName)
     {
         TravelPoint _tpPoint;
+
+        Debug.Log("TEST " + spawnPointName);
+        Debug.Log("Taille : ");
+        foreach (var x in CurrentSpawnList)
+        {
+            Debug.Log("Graaaaah !!!!" + x.ToString());
+        }
         _tpPoint = CurrentSpawnList.Find(spawn => spawn.name == spawnPointName);
         if (_tpPoint == null)
         {
@@ -79,6 +88,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("Tp point to : " + _tpPoint.SpawnPointName);
             _player.transform.position = _tpPoint.transform.position;
         }
     }

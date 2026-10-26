@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class TravelPoint : MonoBehaviour
 {
+    // INSPECTOR
     [SerializeField] private bool _isExit = false;
     [SerializeField] private string _exitName;
     public string ExitName => _exitName;
     [SerializeField] private string _exitSceneName;
     public string ExitSceneName => _exitSceneName;
 
+    // PRIVATE
     private string _spawnPointName;
     public string SpawnPointName => _spawnPointName;
     private string _sceneName;
@@ -45,8 +47,7 @@ public class TravelPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Entered the collision zone for : " + gameObject.name);
-
+        Debug.Log("Tp to : " + _exitName + "on scene :" + _sceneName);
         LevelManager.Instance.TeleportPlayer(_sceneName, _exitName, this);
     }
 }
