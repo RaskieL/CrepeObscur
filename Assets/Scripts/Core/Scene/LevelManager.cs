@@ -1,7 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VectorGraphics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -29,28 +32,31 @@ public class LevelManager : MonoBehaviour
     /// Teleport the player to the specified point, will change his scene before doing so
     /// </summary>
     /// <param name="scene">Scene to be teleported to</param>
-    /// <param name="spawnPointName"></param>
+    /// <param name="spawnPointName">Where we want the player to spawn (which travel Point)</param>
     /// <param name="previousTravelPoint"></param>
-    public void TeleportPlayer(string scene, string spawnPointName, TravelPoint previousTravelPoint)
+    public void TeleportPlayer(string nextSceneName, string spawnPointName, TravelPoint currentTravelPoint)
     {
         if (_currentScene == null) 
         {
             Debug.LogError("No current scene detected");
         }
 
-        if (previousTravelPoint.sceneName == scene)
+        if (currentTravelPoint.SceneName == currentTravelPoint.ExitSceneName)
         {
-            MovePlayer(spawnPointName);
+            MovePlayer(currentTravelPoint.SpawnPointName);
         }
         else
         {
-            Debug.Log("Change to scene : " + scene + " previous scene was : " + _currentScene);
-            // change player scene and teleport it to the set point
+            Debug.Log("Change to scene : " + currentTravelPoint.ExitSceneName + " previous scene was : " + currentTravelPoint.SceneName);
+            ChangeScene(currentTravelPoint.ExitSceneName, currentTravelPoint.SpawnPointName);
         }
     }
 
     // Register a new spawnList
-    public void RegisterSpawnList(List<TravelPoint> list) { CurrentSpawnList = list; }
+    public void RegisterSpawnList(List<TravelPoint> list) 
+    { 
+        CurrentSpawnList = list;
+    }
 
     // Unregister the current spawnList
     public void UnRegisterSpawnList(List<TravelPoint> list)
@@ -58,6 +64,7 @@ public class LevelManager : MonoBehaviour
         if (Instance != null)
         {
             if(list == Instance.CurrentSpawnList) { CurrentSpawnList = null; }
+            Debug.Log("New spawn list registered !");
         }
     }
 
@@ -66,7 +73,37 @@ public class LevelManager : MonoBehaviour
     {
         TravelPoint _tpPoint;
         _tpPoint = CurrentSpawnList.Find(spawn => spawn.name == spawnPointName);
+        if (_tpPoint == null)
+        {
+            Debug.LogError("The specified travel point name does not exist in the list (Did you add it inside the inspector ?)");
+        }
+        else
+        {
+            _player.transform.position = _tpPoint.transform.position;
+        }
+    }
 
-        _player.transform.position = _tpPoint.transform.position;
+    private IEnumerator LoadRoutine(string sceneName, string spawnPointName)
+    {
+        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
+        yield return op;
+
+        MovePlayer(spawnPointName);
+    }
+
+    /*
+    Change the current scene of the player
+    */
+    private void ChangeScene(string sceneName, string spawnPointName)
+    {
+        if (SceneUtility.GetBuildIndexByScenePath(sceneName) == -1)
+        {
+            Debug.LogError($"The scene name : {sceneName}, doesn't exist in the tree, please add it");
+        }
+        else
+        {
+            //Async load scene
+            StartCoroutine(LoadRoutine(sceneName, spawnPointName));
+        }
     }
 }

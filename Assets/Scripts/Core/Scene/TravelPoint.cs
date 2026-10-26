@@ -5,9 +5,15 @@ public class TravelPoint : MonoBehaviour
 {
     [SerializeField] private bool _isExit = false;
     [SerializeField] private string _exitName;
+    public string ExitName => _exitName;
+    [SerializeField] private string _exitSceneName;
+    public string ExitSceneName => _exitSceneName;
 
     private string _spawnPointName;
-    public string sceneName;
+    public string SpawnPointName => _spawnPointName;
+    private string _sceneName;
+    public string SceneName => _sceneName;
+
 
     // Unused for now, meant when a spawn point have a direction for the player to point into the set direction and even walk along a line
     public enum SpawnDirection
@@ -27,15 +33,20 @@ public class TravelPoint : MonoBehaviour
         {
             Debug.LogWarning("Alert exit is set as true but no exit name was set for : " + gameObject.name);
         }
-        sceneName = gameObject.scene.name;
+
+        if (_exitSceneName == null) {
+            Debug.LogWarning("No exitSceneName found, please add the scene where this points lead");
+        }
+
+        _sceneName = gameObject.scene.name;
 
         _spawnPointName = gameObject.name;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Entered the collision zone");
+        Debug.Log("Entered the collision zone for : " + gameObject.name);
 
-        LevelManager.Instance.TeleportPlayer(sceneName, _exitName, this);
+        LevelManager.Instance.TeleportPlayer(_sceneName, _exitName, this);
     }
 }
