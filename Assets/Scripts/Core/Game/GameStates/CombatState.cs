@@ -1,16 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CombatState : BaseGameState
 {
 
-    public CombatState(GameStateManager manager) : base(manager)
+    private CombatManager _combatManager;
+    public CombatState(GameStateManager stateManager, GameManager gameManager) : base(stateManager, gameManager)
     {
         
     }
     
     public override void Enter()
     {
-        Debug.Log("Entering CombatState");
+        _combatManager = UnityEngine.Object.FindAnyObjectByType<CombatManager>();
+        _combatManager.InitializeCombat(_gameManager.PartyManager.ActiveParty, new List<Combatant>(){/* PLACEHOLDER */});
     }
 
     public override void Exit()
