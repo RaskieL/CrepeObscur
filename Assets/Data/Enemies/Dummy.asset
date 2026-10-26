@@ -15,10 +15,13 @@ MonoBehaviour:
   entityName: Dummy
   description: Dummy
   portrait: {fileID: 0}
-  baseStrength: 10
-  baseDexterity: 10
-  baseConstitution: 10
-  baseWisdom: 10
-  baseIntelligence: 10
-  baseCharisma: 10
+  availableActions: []
+  baseStats:
+    maxHealth: 100
+    maxMana: 100
+    physAttack: 10
+    magicAttack: 10
+    physDefense: 10
+    magicDefense: 10
+    speed: 10
   XPGiven: 1

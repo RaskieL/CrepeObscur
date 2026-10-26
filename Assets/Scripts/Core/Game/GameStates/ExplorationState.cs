@@ -3,20 +3,20 @@ using UnityEngine.InputSystem;
 public class ExplorationState : BaseGameState
 {
     private string _stateDescription = "Exploration (press esc to pause)";
-    protected PlayerController _player;
+    protected PlayerInputs _playerInputs;
     public ExplorationState(GameStateManager stateManager, GameManager gameManager) : base(stateManager, gameManager) {}
 
     public override void Enter()
     {
-        _player.enabled = true;
         _gameManager.UIManager.DisplayStateInfo(_stateDescription);
-        _player = Object.FindAnyObjectByType<PlayerController>();
+        _playerInputs = Object.FindAnyObjectByType<PlayerInputs>();
+        _playerInputs.EnableInputs();
         Debug.Log("Entering ExploreState");
     }
 
     public override void Exit()
     {
-        _player.enabled = false;
+        _playerInputs.DisableInputs();
         Debug.Log("Exiting ExploreState");
     }
 
@@ -30,13 +30,13 @@ public class ExplorationState : BaseGameState
 
     public override void Pause()
     {
-        _player.enabled = false;
+        _playerInputs.DisableInputs();
         Debug.Log("Pausing ExploreState");
     }
 
     public override void Resume()
     {
-        _player.enabled = true;
+        _playerInputs.EnableInputs();
         _gameManager.UIManager.DisplayStateInfo(_stateDescription);
         Debug.Log("Resuming ExploreState");
     }

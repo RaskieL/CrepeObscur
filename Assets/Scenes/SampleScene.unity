@@ -163,9 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f37219e1972424c829bd5305094c661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  <GameStateManager>k__BackingField: {fileID: 244004142}
-  <PartyManager>k__BackingField: {fileID: 452247903}
-  <UIManager>k__BackingField: {fileID: 977029946}
+  _gameStateManager: {fileID: 244004142}
+  _partyManager: {fileID: 452247903}
+  _UIManager: {fileID: 977029946}
 --- !u!1 &178125930
 GameObject:
   m_ObjectHideFlags: 0
