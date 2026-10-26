@@ -1742,7 +1742,7 @@ MonoBehaviour:
   playerHeight: 2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   airMultiplier: 0.04
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
