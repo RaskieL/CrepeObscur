@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class SpawnList : MonoBehaviour
 {
-    [SerializeField] public List<TravelPoint> _spawnList;
-
+    [SerializeField] public List<TravelPoint> _spawnList = new();
+    public static SpawnList Current { get; private set; }
+    
     private void Awake()
     {
         if (_spawnList == null)
@@ -15,13 +16,28 @@ public class SpawnList : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        LevelManager.Instance.RegisterSpawnList(_spawnList);
+    private void OnEnable() 
+    { 
+        Current = this; 
     }
 
-    private void OnDisable()
-    {
-        LevelManager.Instance.UnRegisterSpawnList(_spawnList);
+    private void OnDisable() 
+    { 
+        if (Current == this) Current = null; 
     }
+
+    //private void OnEnable()
+    //{
+    //    Debug.Log("CACA PIPI");
+    //    LevelManager.Instance.RegisterSpawnList(_spawnList);
+    //    foreach (TravelPoint obj in _spawnList)
+    //    {
+    //        Debug.Log(obj.name);
+    //    }
+    //}
+
+    //private void OnDisable()
+    //{
+    //    LevelManager.Instance.UnRegisterSpawnList(_spawnList);
+    //}
 }

@@ -1,9 +1,4 @@
-using NUnit.Framework;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VectorGraphics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,7 +6,6 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
     private string _currentScene;
-    private List<TravelPoint> CurrentSpawnList; // Current spawn list object
 
     public static LevelManager Instance;
 
@@ -30,12 +24,11 @@ public class LevelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Teleport the player to the specified point, will change his scene before doing so
+    /// Teleport the player to the specified point, will change the scene before doing so
+    /// Will be called for example when a door get oppened
     /// </summary>
-    /// <param name="scene">Scene to be teleported to</param>
-    /// <param name="spawnPointName">Where we want the player to spawn (which travel Point)</param>
     /// <param name="previousTravelPoint"></param>
-    public void TeleportPlayer(string nextSceneName, string spawnPointName, TravelPoint currentTravelPoint)
+    public void TeleportPlayer(TravelPoint currentTravelPoint)
     {
         if (_currentScene == null) 
         {
@@ -53,57 +46,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // Register a new spawnList
-    public void RegisterSpawnList(List<TravelPoint> list) 
-    {
-        Debug.Log("Registered new spawnList : ");
-        CurrentSpawnList = list;
-    }
-
-    // Unregister the current spawnList
-    public void UnRegisterSpawnList(List<TravelPoint> list)
-    {
-        if (Instance != null)
-        {
-            Debug.Log("Unregistered the spawnList : ");
-            if (list == Instance.CurrentSpawnList) { CurrentSpawnList = null; }
-        }
-    }
-
-    //Not really optimized
-    private void MovePlayer(string spawnPointName)
-    {
-        TravelPoint _tpPoint;
-
-        Debug.Log("TEST " + spawnPointName);
-        Debug.Log("Taille : ");
-        foreach (var x in CurrentSpawnList)
-        {
-            Debug.Log("Graaaaah !!!!" + x.ToString());
-        }
-        _tpPoint = CurrentSpawnList.Find(spawn => spawn.name == spawnPointName);
-        if (_tpPoint == null)
-        {
-            Debug.LogError("The specified travel point name does not exist in the list (Did you add it inside the inspector ?)");
-        }
-        else
-        {
-            Debug.Log("Tp point to : " + _tpPoint.SpawnPointName);
-            _player.transform.position = _tpPoint.transform.position;
-        }
-    }
-
-    private IEnumerator LoadRoutine(string sceneName, string spawnPointName)
-    {
-        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
-        yield return op;
-
-        MovePlayer(spawnPointName);
-    }
-
-    /*
-    Change the current scene of the player
-    */
+    // Change the current scene of the player
     private void ChangeScene(string sceneName, string spawnPointName)
     {
         if (SceneUtility.GetBuildIndexByScenePath(sceneName) == -1)
@@ -115,5 +58,33 @@ public class LevelManager : MonoBehaviour
             //Async load scene
             StartCoroutine(LoadRoutine(sceneName, spawnPointName));
         }
+    }
+
+
+    // Make a Routine to wait for the scene to finish loading before doing anything else
+    private IEnumerator LoadRoutine(string sceneName, string spawnPointName)
+    {
+        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
+        yield return op;
+
+        MovePlayer(spawnPointName);
+    }
+
+    //Not really optimized
+    private void MovePlayer(string spawnPointName)
+    {
+        TravelPoint _tpPoint;
+
+        _tpPoint = SpawnList.Current._spawnList.Find(spawn => spawn != null && spawn.name == spawnPointName);
+        if (_tpPoint == null)
+        {
+            Debug.LogError("The specified travel point name does not exist in the list (Did you add it inside the inspector ?)");
+        }
+        else
+        {
+            Debug.Log("Tp point to : " + _tpPoint.SpawnPointName);
+            _player.transform.position = _tpPoint.transform.position;
+        }
+
     }
 }

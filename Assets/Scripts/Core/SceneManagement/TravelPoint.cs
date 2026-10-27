@@ -31,7 +31,7 @@ public class TravelPoint : MonoBehaviour
 
     private void Awake()
     {
-        if (!_isExit)
+        if (!_isExit && string.IsNullOrEmpty(gameObject.name))
         {
             Debug.LogWarning("Alert exit is set as true but no exit name was set for : " + gameObject.name);
         }
@@ -47,7 +47,10 @@ public class TravelPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Tp to : " + _exitName + "on scene :" + _sceneName);
-        LevelManager.Instance.TeleportPlayer(_sceneName, _exitName, this);
+        if (_isExit)
+        {
+            Debug.Log("Tp to : " + _exitName + "on scene :" + _sceneName);
+            LevelManager.Instance.TeleportPlayer(this);
+        }
     }
 }

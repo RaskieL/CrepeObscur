@@ -119,6 +119,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &53868192
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3098929002508552719, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
+      propertyPath: _isExit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098929002508552719, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
+      propertyPath: _exitName
+      value: BlueSky
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098929002508552719, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
+      propertyPath: _exitSceneName
+      value: AnotherTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584617153231174774, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
+      propertyPath: m_Name
+      value: Butane
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055009479484929628, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055009479484929628, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.722
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055009479484929628, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -28.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055009479484929628, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055009479484929628, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055009479484929628, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055009479484929628, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055009479484929628, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055009479484929628, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055009479484929628, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,7 +598,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3098929002508552719, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
       propertyPath: _isExit
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4584617153231174774, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
       propertyPath: m_Name
@@ -541,7 +610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7055009479484929628, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.58
+      value: 0.722
       objectReference: {fileID: 0}
     - target: {fileID: 7055009479484929628, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1005,4 +1074,5 @@ SceneRoots:
   - {fileID: 1584230781}
   - {fileID: 1721099874}
   - {fileID: 1022043582}
+  - {fileID: 53868192}
   - {fileID: 1708752108}
