@@ -1582,15 +1582,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3098929002508552719, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
       propertyPath: _isExit
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3098929002508552719, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
       propertyPath: _exitName
-      value: 
+      value: SecondSpawn
       objectReference: {fileID: 0}
     - target: {fileID: 3098929002508552719, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
       propertyPath: _exitSceneName
-      value: 
+      value: SampleScene
       objectReference: {fileID: 0}
     - target: {fileID: 4584617153231174774, guid: a6326311ceb934d4ea3d9839ad9d7fa9, type: 3}
       propertyPath: m_Name

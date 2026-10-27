@@ -3,6 +3,13 @@ using UnityEngine;
 
 public class TravelPoint : MonoBehaviour
 {
+
+    /*
+    Do give different names for each points even trhought different scene.
+     
+     */
+
+
     // INSPECTOR
     [SerializeField] private bool _isExit = false;
     [SerializeField] private string _exitName;
@@ -47,10 +54,20 @@ public class TravelPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_isExit)
+        if (_isExit && LevelManager.Instance.lastTpPoint != _exitName)
         {
             Debug.Log("Tp to : " + _exitName + "on scene :" + _sceneName);
+
+            LevelManager.Instance.lastTpPoint = _spawnPointName;
             LevelManager.Instance.TeleportPlayer(this);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (LevelManager.Instance.lastTpPoint == _exitName)
+        {
+            LevelManager.Instance.lastTpPoint = "";
         }
     }
 }

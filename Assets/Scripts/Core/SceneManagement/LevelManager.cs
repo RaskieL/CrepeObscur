@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject _player;
     private string _currentScene;
 
+    public string lastTpPoint;
     public static LevelManager Instance;
 
     private void Awake()
@@ -82,7 +84,6 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Tp point to : " + _tpPoint.SpawnPointName);
             _player.transform.position = _tpPoint.transform.position;
         }
 
