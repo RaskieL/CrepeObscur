@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class SpawnList : MonoBehaviour
@@ -21,23 +19,9 @@ public class SpawnList : MonoBehaviour
         Current = this; 
     }
 
+    // Remove the object when unloading the scene
     private void OnDisable() 
-    { 
-        if (Current == this) Current = null; 
+    {
+        if (Current == this) { Current = null; } 
     }
-
-    //private void OnEnable()
-    //{
-    //    Debug.Log("CACA PIPI");
-    //    LevelManager.Instance.RegisterSpawnList(_spawnList);
-    //    foreach (TravelPoint obj in _spawnList)
-    //    {
-    //        Debug.Log(obj.name);
-    //    }
-    //}
-
-    //private void OnDisable()
-    //{
-    //    LevelManager.Instance.UnRegisterSpawnList(_spawnList);
-    //}
 }

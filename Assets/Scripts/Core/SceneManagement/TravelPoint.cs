@@ -1,13 +1,11 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TravelPoint : MonoBehaviour
 {
 
     /*
-    Do give different names for each points even trhought different scene.
-     
-     */
+    Do give different names for each points even throught different scene.
+    */
 
 
     // INSPECTOR
@@ -22,6 +20,8 @@ public class TravelPoint : MonoBehaviour
     public string SpawnPointName => _spawnPointName;
     private string _sceneName;
     public string SceneName => _sceneName;
+    private Vector3 _boxColliderSize;
+    public Vector3 BoxColliderSize => _boxColliderSize;
 
 
     // Unused for now, meant when a spawn point have a direction for the player to point into the set direction and even walk along a line
@@ -38,18 +38,19 @@ public class TravelPoint : MonoBehaviour
 
     private void Awake()
     {
-        if (!_isExit && string.IsNullOrEmpty(gameObject.name))
+        if (_isExit && string.IsNullOrEmpty(_exitName))
         {
             Debug.LogWarning("Alert exit is set as true but no exit name was set for : " + gameObject.name);
         }
 
         if (_exitSceneName == null) {
-            Debug.LogWarning("No exitSceneName found, please add the scene where this points lead");
+            Debug.LogWarning("No exitSceneName found, please add the scene to where this points lead");
         }
 
         _sceneName = gameObject.scene.name;
 
         _spawnPointName = gameObject.name;
+        _boxColliderSize = GetComponent<BoxCollider>().size;
     }
 
     private void OnTriggerEnter(Collider other)

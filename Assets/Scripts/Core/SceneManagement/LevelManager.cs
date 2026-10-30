@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +6,7 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
     private string _currentScene;
+    private CharacterFollow _characterFollow;
 
     public string lastTpPoint;
     public static LevelManager Instance;
@@ -23,13 +23,15 @@ public class LevelManager : MonoBehaviour
         _currentScene = gameObject.scene.name;
 
         Debug.Log("Current instance of levelManager : " + Instance);
+
+        _characterFollow = _player.GetComponent<CharacterFollow>();
     }
 
     /// <summary>
-    /// Teleport the player to the specified point, will change the scene before doing so
-    /// Will be called for example when a door get oppened
+    /// Teleport the player to the specified point, will change the scene before doing so.
+    /// Will also be called for example when a door get oppened
     /// </summary>
-    /// <param name="previousTravelPoint"></param>
+    /// <param name="currentTravelPoint">The current travel point object reference</param>
     public void TeleportPlayer(TravelPoint currentTravelPoint)
     {
         if (_currentScene == null) 
@@ -39,10 +41,12 @@ public class LevelManager : MonoBehaviour
 
         if (currentTravelPoint.SceneName == currentTravelPoint.ExitSceneName)
         {
+            // start animation
             MovePlayer(currentTravelPoint.ExitName);
         }
         else
         {
+            // start animation
             Debug.Log("Change to scene : " + currentTravelPoint.ExitSceneName + " previous scene was : " + currentTravelPoint.SceneName);
             ChangeScene(currentTravelPoint.ExitSceneName, currentTravelPoint.ExitName);
         }
@@ -72,7 +76,8 @@ public class LevelManager : MonoBehaviour
         MovePlayer(spawnPointName);
     }
 
-    //Not really optimized
+    // TP player and characters follow
+    // Add a switch case with travel point enum to change the direction in which character follow and players should look and be positioned 
     private void MovePlayer(string spawnPointName)
     {
         TravelPoint _tpPoint;
@@ -84,8 +89,14 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            _player.transform.position = _tpPoint.transform.position;
-        }
+            //End animation
+            _player.transform.position = _tpPoint.transform.position + new Vector3(0,_tpPoint.BoxColliderSize.y,0);
 
+            // TP each character to the player position 
+            foreach (Rigidbody r in _characterFollow.characters)
+            {
+                r.transform.position = _tpPoint.transform.position + new Vector3(0, _tpPoint.BoxColliderSize.y, 0);
+            }
+        }
     }
 }
