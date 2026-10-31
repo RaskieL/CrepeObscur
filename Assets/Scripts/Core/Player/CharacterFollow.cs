@@ -8,7 +8,7 @@ public class CharacterFollow : MonoBehaviour
     [SerializeField]
     private PlayerController playerController;
     [SerializeField]
-    private List<Rigidbody> characters;
+    public List<Rigidbody> characters;
     [SerializeField]
     private float stopDistance;
     [SerializeField]
