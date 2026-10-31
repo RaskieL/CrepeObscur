@@ -2,12 +2,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class MenuState : BaseGameState
 {
-    private string _stateDescription = "Menu (press enter to play)";
-    public MenuState(GameStateManager manager) : base(manager) {}
+    private string _stateDescription = "Menu (press enter to play) OUI ÇA MARCHE PLUS BAH PROUT HEIN!->need new scene for main menu";
+    protected PlayerInputs _playerInputs;
+    public MenuState(GameStateManager stateManager, GameManager gameManager) : base(stateManager, gameManager) {}
     public override void Enter()
     {
-        _player.enabled = false;
-        _manager.UI.DisplayStateInfo(_stateDescription);
+        _playerInputs = Object.FindAnyObjectByType<PlayerInputs>();
+        _playerInputs.DisableInputs();
+        _gameManager.UIManager.DisplayStateInfo(_stateDescription);
         Debug.Log("Entering MenuState");
     }
 
@@ -20,8 +22,7 @@ public class MenuState : BaseGameState
     {
         if (Keyboard.current != null && Keyboard.current.enterKey.wasPressedThisFrame)
         {
-            Debug.Log("Enter ke ywas pressed !");
-             _manager.ChangeState(new ExplorationState(_manager));
+             _stateManager.ChangeState(new ExplorationState(_stateManager, _gameManager));
         }   
     }
 
@@ -32,7 +33,7 @@ public class MenuState : BaseGameState
 
     public override void Resume()
     {
-        _manager.UI.DisplayStateInfo(_stateDescription);
+        _gameManager.UIManager.DisplayStateInfo(_stateDescription);
         Debug.Log("Resuming MenuState");
     }
 }

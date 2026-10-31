@@ -3,18 +3,20 @@ using UnityEngine.InputSystem;
 public class ExplorationState : BaseGameState
 {
     private string _stateDescription = "Exploration (press esc to pause)";
-    public ExplorationState(GameStateManager manager) : base(manager) {}
+    protected PlayerInputs _playerInputs;
+    public ExplorationState(GameStateManager stateManager, GameManager gameManager) : base(stateManager, gameManager) {}
 
     public override void Enter()
     {
-        _player.enabled = true;
-        _manager.UI.DisplayStateInfo(_stateDescription);
+        _gameManager.UIManager.DisplayStateInfo(_stateDescription);
+        _playerInputs = Object.FindAnyObjectByType<PlayerInputs>();
+        _playerInputs.EnableInputs();
         Debug.Log("Entering ExploreState");
     }
 
     public override void Exit()
     {
-        _player.enabled = false;
+        _playerInputs.DisableInputs();
         Debug.Log("Exiting ExploreState");
     }
 
@@ -22,20 +24,20 @@ public class ExplorationState : BaseGameState
     {
         if(Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-          _manager.PushState(new PauseState(_manager));
+          _stateManager.PushState(new PauseState(_stateManager, _gameManager));
         }
     }
 
     public override void Pause()
     {
-        _player.enabled = false;
+        _playerInputs.DisableInputs();
         Debug.Log("Pausing ExploreState");
     }
 
     public override void Resume()
     {
-        _player.enabled = true;
-        _manager.UI.DisplayStateInfo(_stateDescription);
+        _playerInputs.EnableInputs();
+        _gameManager.UIManager.DisplayStateInfo(_stateDescription);
         Debug.Log("Resuming ExploreState");
     }
 }

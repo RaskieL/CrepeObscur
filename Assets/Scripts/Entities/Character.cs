@@ -4,7 +4,6 @@ using UnityEngine;
 [System.Serializable] // Permettra la sauvegarde dans un fichier JSON plus tard ?
 public class Character : Combatant
 {
-    // TODO add stats unique to hero
     public string ClassName {get; private set;}
 
     public Character(CharacterData baseData) : base(baseData)

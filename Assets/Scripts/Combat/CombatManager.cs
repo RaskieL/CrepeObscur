@@ -1,15 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
-
-    public void ExecuteAction(Combatant attacker, IDamageable target)
+    public void InitializeCombat(List<Character> playerParty, List<Combatant> enemyParty)
     {
-        int damage = attacker.BaseData.baseStrength; // calcul simple pour le début
+        // TODO
+    }
+    
+    public void ExecuteAction(Combatant attacker, List<IDamageable> targets, ActionData action)
+    {
+        bool result = action.Execute(attacker, targets); // retourne true ou false si l'action a réussi ou échoué TODO: Handle return value
+        if (result)
+        {
+            Debug.Log($"{attacker.BaseData.entityName} a réussi son action woooo");
+        }
+        else
+        {
+            Debug.Log($"{attacker.BaseData.entityName} n'a pas réussi son action boooo");
+        }
         
-        //TODO mettre en place le système de combat utilisant des actions (template définit dans ActionData.cs)
-        
-        target.TakeDamage(damage); // kaboom !
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
