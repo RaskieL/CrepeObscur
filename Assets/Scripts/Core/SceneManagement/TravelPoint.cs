@@ -4,7 +4,7 @@ public class TravelPoint : MonoBehaviour
 {
 
     /*
-    Do give different names for each points even throught different scene.
+    Do give different names for each points even throught different scenes.
     */
 
 
@@ -40,7 +40,7 @@ public class TravelPoint : MonoBehaviour
     {
         if (_isExit && string.IsNullOrEmpty(_exitName))
         {
-            Debug.LogWarning("Alert exit is set as true but no exit name was set for : " + gameObject.name);
+            Debug.LogWarning($"Alert exit is set as true but no exit name was set for : {gameObject.name}");
         }
 
         if (_exitSceneName == null) {
@@ -53,17 +53,17 @@ public class TravelPoint : MonoBehaviour
         _boxColliderSize = GetComponent<BoxCollider>().size;
     }
 
+    // Teleport the player and set the last Tp point to the current
     private void OnTriggerEnter(Collider other)
     {
         if (_isExit && LevelManager.Instance.lastTpPoint != _exitName)
         {
-            Debug.Log("Tp to : " + _exitName + "on scene :" + _sceneName);
-
             LevelManager.Instance.lastTpPoint = _spawnPointName;
             LevelManager.Instance.TeleportPlayer(this);
         }
     }
 
+    // Clear the last tp point
     private void OnTriggerExit(Collider other)
     {
         if (LevelManager.Instance.lastTpPoint == _exitName)

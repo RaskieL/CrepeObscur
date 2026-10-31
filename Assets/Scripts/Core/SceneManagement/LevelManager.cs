@@ -39,15 +39,14 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("No current scene detected");
         }
 
+        // start animation --<
         if (currentTravelPoint.SceneName == currentTravelPoint.ExitSceneName)
         {
-            // start animation
             MovePlayer(currentTravelPoint.ExitName);
         }
         else
         {
-            // start animation
-            Debug.Log("Change to scene : " + currentTravelPoint.ExitSceneName + " previous scene was : " + currentTravelPoint.SceneName);
+            Debug.Log($"Change to scene : {currentTravelPoint.ExitSceneName}, previous scene was : {currentTravelPoint.SceneName}");
             ChangeScene(currentTravelPoint.ExitSceneName, currentTravelPoint.ExitName);
         }
     }
@@ -89,7 +88,6 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            //End animation
             _player.transform.position = _tpPoint.transform.position + new Vector3(0,_tpPoint.BoxColliderSize.y,0);
 
             // TP each character to the player position 
@@ -97,6 +95,7 @@ public class LevelManager : MonoBehaviour
             {
                 r.transform.position = _tpPoint.transform.position + new Vector3(0, _tpPoint.BoxColliderSize.y, 0);
             }
+            //End animation --<
         }
     }
 }

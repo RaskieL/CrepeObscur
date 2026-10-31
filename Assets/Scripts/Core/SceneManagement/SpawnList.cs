@@ -10,7 +10,7 @@ public class SpawnList : MonoBehaviour
     {
         if (_spawnList == null)
         {
-            Debug.LogWarning("There is no set spawn point inside : " + gameObject.scene.name);
+            Debug.LogWarning($"There is no set spawn point inside : {gameObject.scene.name}");
         }
     }
 
